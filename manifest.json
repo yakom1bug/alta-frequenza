@@ -1,0 +1,17 @@
+{
+  "name": "Alta Frequenza",
+  "short_name": "Alta Frequenza",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0b1020",
+  "theme_color": "#0b1020",
+  "description": "Écouter Alta Frequenza en direct",
+  "icons": [
+    {
+      "src": "icon-180.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
