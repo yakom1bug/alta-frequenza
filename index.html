@@ -1,7 +1,10 @@
 <!doctype html><html lang="fr"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0b1020"><meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Alta Frequenza"><title>Alta Frequenza</title>
+<meta name="apple-mobile-web-app-title" content="Alta Frequenza">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-180.png">
+<title>Alta Frequenza</title>
 <style>
 *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#0b1020}body{min-height:100vh;min-height:100svh;display:grid;place-items:center;padding:14px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#fff}
 main{width:min(440px,100%);text-align:center;padding:22px 18px 20px;border-radius:30px;background:rgba(255,255,255,.075);box-shadow:0 20px 70px rgba(0,0,0,.42);border:1px solid rgba(255,255,255,.08)}
@@ -20,13 +23,12 @@ const STREAM="https://altafrequenza.ice.infomaniak.ch/altafrequenza-128.mp3",LIV
 const audio=document.getElementById("audio"),play=document.getElementById("play"),status=document.getElementById("status"),show=document.getElementById("show"),artist=document.getElementById("artist"),title=document.getElementById("title"),updated=document.getElementById("updated");
 function parseLive(data){if(!data.trim())return;const p=data.trim().split(",");show.textContent=(p[0]||"Alta Frequenza").trim();artist.textContent=(p[2]||"").trim();title.textContent=p.slice(3).join(",").trim();updated.textContent="Infos mises à jour à "+new Date().toLocaleTimeString("fr-FR")}
 let busy=false;
-async function updateLive(){if(busy)return;busy=true;const c=new AbortController(),t=setTimeout(()=>c.abort(),7000);try{const r=await fetch(LIVE_URL+"?t="+Date.now(),{
-  cache:"no-store",
-  mode:"cors",
-  signal:c.signal
-});if(!r.ok)throw new Error(r.status);parseLive(await r.text())}catch(e){console.log("Live metadata:",e)}finally{clearTimeout(t);busy=false}}
+async function updateLive(){if(busy)return;busy=true;const c=new AbortController(),t=setTimeout(()=>c.abort(),7000);try{const r=await fetch(LIVE_URL+"?t="+Date.now(),{cache:"no-store",headers:{"Cache-Control":"no-cache"},signal:c.signal});if(!r.ok)throw new Error(r.status);parseLive(await r.text())}catch(e){console.log("Live metadata:",e)}finally{clearTimeout(t);busy=false}}
 async function startRadio(){if(!audio.src)audio.src=STREAM;try{await audio.play();play.textContent="⏸ PAUSE";status.textContent="🔴 Alta Frequenza est en direct"}catch(e){status.textContent="Impossible de démarrer — appuyez à nouveau"}}
 play.addEventListener("click",async()=>{if(audio.paused)await startRadio();else{audio.pause();play.textContent="▶ ÉCOUTER";status.textContent="Lecture en pause"}});
 audio.addEventListener("play",()=>{play.textContent="⏸ PAUSE";status.textContent="🔴 Alta Frequenza est en direct"});audio.addEventListener("pause",()=>play.textContent="▶ ÉCOUTER");audio.addEventListener("error",()=>status.textContent="Flux audio indisponible — réessayez");
 updateLive();setInterval(updateLive,3000);
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js"));
+}
 </script></body></html>
