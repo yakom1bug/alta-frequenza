@@ -8,7 +8,7 @@
   "description": "Écouter Alta Frequenza en direct",
   "icons": [
     {
-      "src": "icon-alta.png?v=2",
+      "src": "alta-icon-v8.png",
       "sizes": "180x180",
       "type": "image/png",
       "purpose": "any"
