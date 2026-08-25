@@ -19,7 +19,11 @@ button{width:100%;border:0;border-radius:18px;padding:19px 18px;font-size:20px;f
 <div class="logo"><img src="alta-icon-v8.png" alt="Alta Frequenza"></div><div class="live"><span class="dot"></span>En direct</div>
 <section class="program" aria-live="polite"><div class="show" id="show">Recherche de l'émission…</div><div class="artist" id="artist"></div><div class="title" id="title"></div><div id="updated"></div></section>
 <button id="play" type="button">▶ ÉCOUTER</button><div id="status">Appuyez pour écouter</div><audio id="audio" controls preload="none"></audio>
-<div class="links"><a href="https://www.alta-frequenza.corsica/webradios">🌐 Site</a><a href="https://www.facebook.com/AltaFrequenza">f Facebook</a></div><div class="note">Alta Frequenza — V8</div>
+<div class="links"><a href="https://www.alta-frequenza.corsica/webradios">🌐 Site</a><a href="https://www.facebook.com/AltaFrequenza" aria-label="Facebook">
+<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+<path d="M14 8h3V4h-3c-2.8 0-5 2.2-5 5v2H6v4h3v5h4v-5h3l1-4h-4V9c0-.6.4-1 1-1z"/>
+</svg>
+</a></div><div class="note">Alta Frequenza — V8</div>
 </main><script>
 const STREAM="https://altafrequenza.ice.infomaniak.ch/altafrequenza-128.mp3",LIVE_URL="https://soft-cake-03bd.ayto2a.workers.dev/";
 const audio=document.getElementById("audio"),play=document.getElementById("play"),status=document.getElementById("status"),show=document.getElementById("show"),artist=document.getElementById("artist"),title=document.getElementById("title"),updated=document.getElementById("updated");
