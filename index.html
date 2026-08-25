@@ -1,10 +1,7 @@
 <!doctype html><html lang="fr"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0b1020"><meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Alta Frequenza">
-<link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="icon1-180.png">
-<title>Alta Frequenza</title>
+<meta name="apple-mobile-web-app-title" content="Alta Frequenza"><title>Alta Frequenza</title>
 <style>
 *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#0b1020}body{min-height:100vh;min-height:100svh;display:grid;place-items:center;padding:14px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#fff}
 main{width:min(440px,100%);text-align:center;padding:22px 18px 20px;border-radius:30px;background:rgba(255,255,255,.075);box-shadow:0 20px 70px rgba(0,0,0,.42);border:1px solid rgba(255,255,255,.08)}
@@ -17,7 +14,7 @@ button{width:100%;border:0;border-radius:18px;padding:19px 18px;font-size:20px;f
 <div class="logo">ALTA<br>FREQUENZA</div><h1>Alta Frequenza</h1><div class="live"><span class="dot"></span>En direct</div>
 <section class="program" aria-live="polite"><div class="show" id="show">Recherche de l'émission…</div><div class="artist" id="artist"></div><div class="title" id="title"></div><div id="updated"></div></section>
 <button id="play" type="button">▶ ÉCOUTER</button><div id="status">Appuyez pour écouter</div><audio id="audio" controls preload="none"></audio>
-<div class="links"><a href="https://www.alta-frequenza.corsica/webradios">🌐 Site</a><a href="https://www.facebook.com/AltaFrequenza">f Facebook</a></div><div class="note">Alta Frequenza — V5</div>
+<div class="links"><a href="https://www.alta-frequenza.corsica/webradios">🌐 Site</a><a href="https://www.facebook.com/AltaFrequenza">f Facebook</a></div><div class="note">Alta Frequenza — V7</div>
 </main><script>
 const STREAM="https://altafrequenza.ice.infomaniak.ch/altafrequenza-128.mp3",LIVE_URL="https://soft-cake-03bd.ayto2a.workers.dev/";
 const audio=document.getElementById("audio"),play=document.getElementById("play"),status=document.getElementById("status"),show=document.getElementById("show"),artist=document.getElementById("artist"),title=document.getElementById("title"),updated=document.getElementById("updated");
@@ -28,7 +25,4 @@ async function startRadio(){if(!audio.src)audio.src=STREAM;try{await audio.play(
 play.addEventListener("click",async()=>{if(audio.paused)await startRadio();else{audio.pause();play.textContent="▶ ÉCOUTER";status.textContent="Lecture en pause"}});
 audio.addEventListener("play",()=>{play.textContent="⏸ PAUSE";status.textContent="🔴 Alta Frequenza est en direct"});audio.addEventListener("pause",()=>play.textContent="▶ ÉCOUTER");audio.addEventListener("error",()=>status.textContent="Flux audio indisponible — réessayez");
 updateLive();setInterval(updateLive,3000);
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js"));
-}
 </script></body></html>
